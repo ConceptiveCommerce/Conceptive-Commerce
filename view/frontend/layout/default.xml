@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.panel" >
+            <block class="Conceptive\Christmas\Block\Index" name="homepage-custom" template="Conceptive_Christmas::homepage.phtml" before="-" cacheable="false" />
+        </referenceContainer>
+        <move element="homepage-custom" destination="page.wrapper" before="-" />
+
+        <!-- <move element="homepage-custom" destination="header.container" before="-" /> -->
+    </body>
+</page>

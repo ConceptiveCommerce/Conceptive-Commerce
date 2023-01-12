@@ -1,0 +1,338 @@
+<?php
+
+$page =  $this->request->getControllerName();
+
+$values = $this->helper->isEnabled();
+$currentStore = $this->storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . "conceptive/christmas/";
+
+
+//  General Configuration Settings
+// $theme = $this->helper->getGeneralConfig("general", "theme");
+$todayDate = $this->getTimeAccordingToTimeZone();
+$startDate = $this->helper->getGeneralConfig("general", "startdate");
+$bannerEndDate = $this->helper->getGeneralConfig("general", "endtdate");
+$displyOn = $this->helper->getGeneralConfig("general", "themepos");
+$displyIn = $this->helper->getGeneralConfig("general", "displayin");
+
+
+//  Christmas Decoration Settings
+
+$decorationEnable = $this->helper->getGeneralConfig("christmasDecoration", "enable");
+$decoraImgUploaded = $mediaUrl . $this->helper->getGeneralConfig("christmasDecoration", "image");
+$decoraImgUrlSelected = $this->helper->getGeneralConfig("christmasDecoration", "imageSelect");
+$fallingflakes = $this->helper->getGeneralConfig("christmasDecoration", "fallingflakes");
+$rotatefallingflakes = $this->helper->getGeneralConfig("christmasDecoration", "rotateImages");
+
+
+
+//  Christmas Image Settings
+
+$christmasImgEnable = $this->helper->getGeneralConfig("christmasImage", "enable");
+$christmasImgUploaded = $this->helper->getGeneralConfig("christmasImage", "image");
+$christmasImgUrlSelected = $this->helper->getGeneralConfig("christmasImage", "imageSelect");
+$posOfSantImg = $this->helper->getGeneralConfig("christmasImage", "posofImage");
+
+if (isset($christmasImgUploaded)) {
+    $santaImg = $mediaUrl . $christmasImgUploaded;
+} elseif (isset($christmasImgUrlSelected)) {
+    $santaImg = $christmasImgUrlSelected;
+} else {
+    $santaImg  = "";
+}
+
+
+
+//  GIF Settings
+
+$gifEnable = $this->helper->getGeneralConfig("gifSettings", "enable");
+$gifmgUploaded = $this->helper->getGeneralConfig("gifSettings", "image");
+$gifSelected = $this->helper->getGeneralConfig("gifSettings", "imageSelect");
+
+if (isset($gifmgUploaded)) {
+    $gifImg = $mediaUrl . $gifmgUploaded;
+} elseif (isset($gifSelected)) {
+    $gifImg = $gifSelected;
+} else {
+    $gifImg  = "";
+}
+
+// Header
+
+$headerEnable = $this->helper->getGeneralConfig("headerSettings", "enable");
+$headerImgUploaded = $this->helper->getGeneralConfig("headerSettings", "image");
+$headerImgUrlSelected = $this->helper->getGeneralConfig("headerSettings", "imageSelect");
+
+if (isset($headerImgUploaded)) {
+    $headerImg = $mediaUrl . $headerImgUploaded;
+} elseif (isset($headerImgUrlSelected)) {
+    $headerImg = $headerImgUrlSelected;
+} else {
+    $headerImg  = "";
+}
+
+
+// Footer
+
+$footerEnable = $this->helper->getGeneralConfig("footerSettings", "enable");
+$footerImgUploaded = $this->helper->getGeneralConfig("footerSettings", "image");
+$footerImgUrlSelected = $this->helper->getGeneralConfig("footerSettings", "imageSelect");
+
+if (isset($footerImgUploaded)) {
+    $footerImg = $mediaUrl . $footerImgUploaded;
+} elseif (isset($footerImgUrlSelected)) {
+    $footerImg = $footerImgUrlSelected;
+} else {
+    $footerImg  = "";
+}
+
+
+if (($displyOn == "All Pages") || (($page == "index") && ($displyOn == "Homepage")) || (($page == "category") && ($displyOn == "Category Page")) || (($page == "cart") && ($displyOn == "Cart Page")) || (($page == "product") && ($displyOn == "Product Page"))) {
+
+
+    if (($startDate != null) && ($bannerEndDate != null)) {
+        if (($startDate < $todayDate) && ($bannerEndDate > $todayDate)) {  ?>
+            <!-- Header -->
+            <?php if ($headerEnable == 1) { ?>
+                <div class="header-container-christmas"></div>
+            <?php } ?>
+
+            <!-- Falling Effect -->
+            <?php if ($decorationEnable == 1) { ?>
+
+                <div class="falling-wrapper">
+                    <div class="falling-leaves">
+                        <?php for ($i = 0; $i < $fallingflakes; $i++) { ?>
+                            <span class="falling-leaves-span <?= $i + 1 ?>"></span>
+                        <?php }
+                        ?>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+            <!-- Santa -->
+            <?php if ($christmasImgEnable == 1) { ?>
+                <div class="santa-container">
+                    <img src="<?= $santaImg ?>" alt="">
+                </div>
+            <?php } ?>
+
+            <!-- Santa Gif -->
+            <?php if ($gifEnable == 1) { ?>
+                <div class="santa-gif-container">
+                    <img src="<?= $gifImg ?>" alt="">
+                    <!-- <div class="sant-git-child">
+                </div> -->
+                </div>
+            <?php } ?>
+
+            <!-- Footer -->
+            <?php if ($footerEnable == 1) { ?>
+                <div class="footer-container-content"></div>
+            <?php } ?>
+<?php
+        }
+    }
+}
+
+?>
+
+<style>
+    /* gif css */
+    .santa-gif-container {
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        min-width: 300px;
+        right: 35%;
+    }
+
+    .header-container-christmas {
+        height: 70px;
+        width: 100%;
+        background-image: url(<?= $headerImg ?>);
+        background-size: contain;
+        position: sticky;
+        z-index: 99;
+        top: 0;
+        background-color: white;
+    }
+
+    .footer-container-content {
+        height: 50px;
+        width: 100%;
+        background-image: url(<?= $footerImg ?>);
+        background-size: contain;
+        position: fixed;
+        z-index: 95;
+        bottom: 0;
+    }
+
+    /* Santa Image */
+
+    .santa-container img {
+        width: 200px;
+    }
+
+    .santa-container {
+        height: 225px;
+        position: fixed;
+        text-align: right;
+        z-index: 99;
+        /* bottom: 50px;
+        right: 5px; */
+        <?php if ($posOfSantImg == "Bottom-Right") {
+            echo "bottom: 50px;";
+            echo "right: 5px;";
+        } elseif ($posOfSantImg == "Bottom-Left") {
+            echo "bottom: 50px;";
+            echo "left: 5px;";
+        } elseif ($posOfSantImg == "Top-Right") {
+            echo "right: 5px;";
+        } elseif ($posOfSantImg == "Top-Left") {
+            echo "left: 5px;";
+        }  ?>
+    }
+
+    /* Falling Effect */
+
+    .falling-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 90;
+    }
+
+    .falling-leaves {
+        text-align: center;
+    }
+
+    .falling-leaves .falling-leaves-span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: url(<?= $decoraImgUrlSelected ?>);
+        margin: -344px 40px 55px 0;
+        animation: animate 10s infinite linear;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(3n+0) {
+        animation-delay: 3s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(3n+2) {
+        animation-delay: 1.3s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(2n+5) {
+        animation-delay: 1.5s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(5n+5) {
+        animation-delay: 1.1s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(3n+10) {
+        animation-delay: 2.1s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(7n+2) {
+        animation-delay: 3.5s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(4n+5) {
+        animation-delay: 5s;
+    }
+
+    .falling-leaves .falling-leaves-span:nth-child(3n+7) {
+        animation-delay: 7s;
+    }
+
+    @keyframes animate {
+        0% {
+            width: 40px;
+            height: 40px;
+            opacity: 1;
+            <?php
+
+            if ($rotatefallingflakes == 1) {
+                echo "transform: translate(0, 0) rotateZ(0deg);";
+            } elseif ($rotatefallingflakes == 0) {
+                echo "transform: translate(0, 0);";
+            }
+
+            ?>
+        }
+
+        70% {
+            width: 40px;
+            height: 40px;
+            opacity: 1;
+            <?php
+
+            if ($rotatefallingflakes == 1) {
+                echo "transform: translate(100px, 500px) rotateZ(270deg);";
+            } elseif ($rotatefallingflakes == 0) {
+                echo " transform: translate(100px, 500px);";
+            }
+
+            ?>
+        }
+
+        100% {
+            width: 40px;
+            height: 40px;
+            opacity: 0;
+            <?php
+
+            if ($rotatefallingflakes == 1) {
+                echo "transform: translate(120px, 700px) rotateZ(360deg);";
+            } elseif ($rotatefallingflakes == 0) {
+                echo " transform: translate(120px, 700px);";
+            }
+
+            ?>
+        }
+    }
+
+    @media only screen and (max-width:768px) {
+        .santa-container img {
+            width: 100px;
+        }
+
+        .santa-gif-container {
+            min-width: 100px;
+        }
+    }
+
+    /* For Display Theme in view */
+
+    <?php
+    if ($displyIn  == "Desktop") { ?>@media only screen and (max-width:768px) {
+
+        .header-container-christmas,
+        .falling-wrapper,
+        .santa-container,
+        .santa-gif-container,
+        .footer-container-content {
+            display: none;
+        }
+    }
+
+    <?php } ?><?php
+                if ($displyIn  == "Mobile") { ?>@media only screen and (min-width:769px) {
+
+        .header-container-christmas,
+        .falling-wrapper,
+        .santa-container,
+        .santa-gif-container,
+        .footer-container-content {
+            display: none;
+        }
+    }
+
+    <?php } ?>
+</style>
