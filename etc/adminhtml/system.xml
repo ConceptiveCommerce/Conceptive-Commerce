@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="conceptive" translate="label" sortOrder="10">
+            <label>Conceptive Commerce</label>
+        </tab>
+        <section id="christmas" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Christmas Decoration</label>
+            <tab>conceptive</tab>
+            <resource>Conceptive_Christmas::configuration</resource>
+
+            <!-- General Configuration -->
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <!-- <field id="theme" translate="label comment" sortOrder="15" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Theme</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\Theme</source_model>
+                </field> -->
+                <field id="startdate" translate="label" sortOrder="20" type="date" showInDefault="1" showInWebsite="1"
+                    showInStore="1">
+                    <label>Start Date</label>
+                    <frontend_model>Conceptive\Christmas\Block\Adminhtml\DateTime</frontend_model>
+                </field>
+                <field id="endtdate" translate="label" sortOrder="25" type="date" showInDefault="1" showInWebsite="1"
+                    showInStore="1">
+                    <label>End Date</label>
+                    <frontend_model>Conceptive\Christmas\Block\Adminhtml\DateTime</frontend_model>
+                </field>
+                <field id="themepos" translate="label" sortOrder="30" type="multiselect" showInDefault="1" showInWebsite="1"
+                    showInStore="1">
+                    <label>Theme Display on Pages</label>
+                    <frontend_class>pages-position</frontend_class>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\ThemePos</source_model>
+                    <comment>Theme will display on the selected pages(s)</comment>
+                </field>
+                <field id="displayin" translate="label" sortOrder="35" type="select" showInDefault="1" showInWebsite="1"
+                    showInStore="1">
+                    <label>Display Theme in view(s)</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\DisplayIn</source_model>
+                    <comment>Theme will display in which screen on frontend</comment>
+                </field>
+            </group>
+
+            <!-- Christmas Decoration Settings -->
+
+            <group id="christmasDecoration" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Christmas Decoration Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Decoration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload New Image</label>
+                    <backend_model>Conceptive\Christmas\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">conceptive/christmas</base_url>
+                </field>
+                <field id="imageSelect" translate="label" type="radios" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Image</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\SelectImage</source_model>
+                </field>
+                <field id="fallingflakes" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of Flakes</label>
+                    <validate>validate-number</validate>
+                    <comment>Enter number of items for falling effects</comment>
+                </field>
+                <field id="rotateImages" translate="label" type="radios" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rotate Falling Images</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\RotateFallingImages</source_model>
+                </field>
+            </group>
+
+            <!-- Christmas Image Settings -->
+
+            <group id="christmasImage" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Christmas Image Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Image</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload New Image</label>
+                    <backend_model>Conceptive\Christmas\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">conceptive/christmas</base_url>
+                </field>
+                <field id="imageSelect" translate="label" type="radios" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select mage</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\SelectSantaImage</source_model>
+                </field>
+                <field id="posofImage" translate="label" sortOrder="35" type="select" showInDefault="1" showInWebsite="1"
+                    showInStore="1">
+                    <label>Position Of Image</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\Position</source_model>
+                </field>
+            </group>
+
+            <!-- GIF Settings -->
+
+            <group id="gifSettings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>GIF Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show GIF</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload New GIF</label>
+                    <backend_model>Conceptive\Christmas\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">conceptive/christmas</base_url>
+                </field>
+                <field id="imageSelect" translate="label" type="radios" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select GIF</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\SelectGifImage</source_model>
+                </field>
+            </group>
+
+            <!-- Header Image Settings -->
+
+            <group id="headerSettings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Header Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Header Decoration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload New Image</label>
+                    <backend_model>Conceptive\Christmas\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">conceptive/christmas</base_url>
+                </field>
+                <field id="imageSelect" translate="label" type="radios" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Image</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\SelectHeaderImage</source_model>
+                </field>
+            </group>
+
+            <!-- Footer Image Settings -->
+
+            <group id="footerSettings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Footer Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Footer Decoration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload New Image</label>
+                    <backend_model>Conceptive\Christmas\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">conceptive/christmas</base_url>
+                </field>
+                <field id="imageSelect" translate="label" type="radios" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select Image</label>
+                    <source_model>Conceptive\Christmas\Model\Config\Source\SelectFooterImage</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

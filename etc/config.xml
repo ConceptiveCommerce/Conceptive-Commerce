@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <christmas>
+            <general>
+                <enable>1</enable>
+            </general>
+            <christmasDecoration>
+                    <enable>1</enable>
+                    <fallingflakes>10</fallingflakes>
+                    <rotateImages>1</rotateImages>
+            </christmasDecoration>
+            <christmasImage>
+                <enable>1</enable>
+                <posofImage>Bottom-Right</posofImage>
+            </christmasImage>
+            <gifSettings>
+                <enable>1</enable>
+            </gifSettings>
+            <headerSettings>
+                <enable>1</enable>
+            </headerSettings>
+            <footerSettings>
+                <enable>1</enable>
+            </footerSettings>
+        </christmas>
+    </default>
+</config>
